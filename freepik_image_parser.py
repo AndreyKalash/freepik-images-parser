@@ -56,8 +56,15 @@ def get_pics(driver, URL:str, to_dir:str, img_name:str='', need_pics:int=200):
             another_page_pics -= save_pics(driver, another_page_pics, need_pics, img_name, to_dir)
 
 
-def main(save_path):
+def main(save_path, categories):
     driver = webdriver.Firefox()
+
+    for url, dir_name, img_name in categories:
+        get_pics(driver, url, save_path+dir_name, img_name)
+
+
+if __name__ == '__main__':
+    save_path = os.path.abspath(os.getcwd()) # save to project dir
 
     categories = [
         ('https://www.freepik.com/search?format=search&query=0-6+years+old+male+face+live+photo', '0-6 yo', 'male'),
@@ -73,10 +80,4 @@ def main(save_path):
         ('https://www.freepik.com/search?format=search&query=51-90+years+old+female+face+live+photo', '51-90 yo', 'female')
     ]
 
-    for url, dir_name, img_name in categories:
-        get_pics(driver, url, save_path+dir_name, img_name)
-
-
-if __name__ == '__main__':
-    project_dir_path = os.path.abspath(os.getcwd())
-    main(project_dir_path) # save to project dir
+    main(save_path, categories) 

@@ -1,5 +1,4 @@
 import os
-
 import requests
 from PIL import Image
 from selenium import webdriver
